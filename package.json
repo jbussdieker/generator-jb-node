@@ -1,6 +1,6 @@
 {
   "name": "generator-jb-node",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate a NodeJS project",
   "main": "index.js",
   "homepage": "https://github.com/jbussdieker/generator-jb-node",
