@@ -3,23 +3,33 @@
   "version": "1.0.2",
   "description": "Generate a NodeJS project",
   "main": "index.js",
-  "homepage": "https://github.com/jbussdieker/generator-jb-node",
+  "homepage": "https://github.com/jbussdieker/generator-jb-node#readme",
   "files": [
     "app"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "pretest": "eslint . --fix"
   },
   "repository": {
     "type": "git",
-    "url": "gitrepository"
+    "url": "git+https://github.com/jbussdieker/generator-jb-node.git"
   },
   "keywords": [
     "generator"
   ],
-  "author": "Joshua B. Bussdieker",
+  "author": {
+    "name": "Joshua B. Bussdieker",
+    "email": "jbussdieker@gmail.com",
+    "url": "https://github.com/jbussdieker"
+  },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbussdieker/generator-jb-node/issues"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "eslintConfig": {
     "extends": [
       "xo-space/esnext",

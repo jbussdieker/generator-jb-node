@@ -23,20 +23,36 @@ const existingPkg = {
 
 describe('jb-node:app', () => {
   describe('without existing package.json', () => {
-    beforeEach(() => {
-      return helpers.run(path.join(__dirname, '../app')).withOptions(testOptions);
+    describe('without name', () => {
+      beforeEach(() => {
+        return helpers.run(path.join(__dirname, '../app'));
+      });
+
+      it('does not set package name', () => {
+        assert.noJsonFileContent('package.json', { name: testOptions.name });
+      });
     });
 
-    it('creates package.json', () => {
-      assert.file('package.json');
-    });
+    describe('with name', () => {
+      beforeEach(() => {
+        return helpers.run(path.join(__dirname, '../app')).withOptions(testOptions);
+      });
 
-    it('creates .gitignore', () => {
-      assert.file('.gitignore');
-    });
+      it('creates package.json', () => {
+        assert.file('package.json');
+      });
 
-    it('sets defaults in package.json', () => {
-      assert.jsonFileContent('package.json', defaultPkg);
+      it('creates .gitignore', () => {
+        assert.file('.gitignore');
+      });
+
+      it('sets package name', () => {
+        assert.jsonFileContent('package.json', { name: testOptions.name });
+      });
+
+      it('sets defaults in package.json', () => {
+        assert.jsonFileContent('package.json', defaultPkg);
+      });
     });
   });
 
