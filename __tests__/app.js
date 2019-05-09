@@ -2,58 +2,35 @@
 const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
-
-const testOptions = {
-  name: 'foo'
-};
-
-const defaultPkg = {
-  name: 'foo',
-  version: '0.0.0',
-  description: '',
-  author: ''
-};
+const fs = require('fs');
 
 const existingPkg = {
-  name: 'bar',
-  version: '2.0.0',
-  description: 'mything',
-  author: 'me'
+  dont: 'touch'
 };
 
 describe('jb-node:app', () => {
   describe('without existing package.json', () => {
+    describe('with name', () => {
+      beforeEach(() => {
+        return helpers
+          .run(path.join(__dirname, '../generators/app'))
+          .withPrompts({ name: 'foo' });
+      });
+
+      it('creates files', () => {
+        assert.file(['package.json', '.gitignore']);
+      });
+    });
+
     describe('without name', () => {
       beforeEach(() => {
         return helpers.run(path.join(__dirname, '../generators/app'));
       });
 
-      it('does not set package name', () => {
-        assert.noJsonFileContent('package.json', { name: testOptions.name });
-      });
-    });
-
-    describe('with name', () => {
-      beforeEach(() => {
-        return helpers
-          .run(path.join(__dirname, '../generators/app'))
-          .withPrompts(testOptions);
-      });
-
-      it('creates package.json', () => {
-        assert.file('package.json');
-      });
-
-      it('creates .gitignore', () => {
-        assert.file('.gitignore');
-      });
-
-      it('sets package name', () => {
-        assert.jsonFileContent('package.json', { name: testOptions.name });
-      });
-
-      it('sets defaults in package.json', () => {
-        assert.jsonFileContent('package.json', defaultPkg);
+      it('uses appname', () => {
+        const content = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+        assert(content.name !== 'null');
+        assert(content.name !== undefined);
       });
     });
   });
@@ -62,7 +39,7 @@ describe('jb-node:app', () => {
     beforeEach(() => {
       return helpers
         .run(path.join(__dirname, '../generators/app'))
-        .withPrompts(testOptions)
+        .withPrompts({ name: 'foo' })
         .on('ready', gen => {
           gen.fs.writeJSON(gen.destinationPath('package.json'), existingPkg);
           gen.fs.write(gen.destinationPath('.gitignore'), 'foo');

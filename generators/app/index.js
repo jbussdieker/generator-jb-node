@@ -14,7 +14,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Name',
-        default: null
+        default: this.appname
       },
       {
         type: 'input',

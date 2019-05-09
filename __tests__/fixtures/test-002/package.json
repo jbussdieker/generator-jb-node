@@ -2,5 +2,6 @@
   "name": "foo",
   "version": "0.0.0",
   "description": "",
-  "author": ""
+  "author": "",
+  "license": "MIT"
 }

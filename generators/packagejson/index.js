@@ -8,7 +8,7 @@ module.exports = class extends Generator {
     this.option('name', {
       type: String,
       required: true,
-      default: this.determineAppname(),
+      default: this.appname,
       description: 'The package name'
     });
     this.option('version', {
@@ -26,6 +26,11 @@ module.exports = class extends Generator {
       default: '',
       description: 'The package author'
     });
+    this.option('license', {
+      type: String,
+      default: 'MIT',
+      description: 'The package license'
+    });
     this.option('target', {
       type: String,
       required: false,
@@ -39,7 +44,8 @@ module.exports = class extends Generator {
       name: this.options.name,
       version: this.options.version,
       description: this.options.description,
-      author: this.options.author
+      author: this.options.author,
+      license: this.options.license
     });
     this.fs.writeJSON(this.destinationPath(this.options.target), pkg);
   }
