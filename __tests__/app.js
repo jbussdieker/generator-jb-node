@@ -9,7 +9,7 @@ const testOptions = {
 
 const defaultPkg = {
   name: 'foo',
-  version: '1.0.0',
+  version: '0.0.0',
   description: '',
   author: ''
 };
@@ -37,7 +37,7 @@ describe('jb-node:app', () => {
       beforeEach(() => {
         return helpers
           .run(path.join(__dirname, '../generators/app'))
-          .withOptions(testOptions);
+          .withPrompts(testOptions);
       });
 
       it('creates package.json', () => {
@@ -62,7 +62,7 @@ describe('jb-node:app', () => {
     beforeEach(() => {
       return helpers
         .run(path.join(__dirname, '../generators/app'))
-        .withOptions(testOptions)
+        .withPrompts(testOptions)
         .on('ready', gen => {
           gen.fs.writeJSON(gen.destinationPath('package.json'), existingPkg);
           gen.fs.write(gen.destinationPath('.gitignore'), 'foo');

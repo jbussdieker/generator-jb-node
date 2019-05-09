@@ -28,7 +28,8 @@
     "url": "https://github.com/jbussdieker/generator-jb-node/issues"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": ["/fixtures/"]
   },
   "eslintConfig": {
     "extends": [
@@ -63,6 +64,8 @@
     "yeoman-test": "^1.9.1"
   },
   "dependencies": {
-    "yeoman-generator": "^4.0.0"
+    "yeoman-generator": "^4.0.0",
+    "chalk": "^2.1.0",
+    "yosay": "^2.0.1"
   }
 }
