@@ -25,7 +25,7 @@ describe('jb-node:app', () => {
   describe('without existing package.json', () => {
     describe('without name', () => {
       beforeEach(() => {
-        return helpers.run(path.join(__dirname, '../app'));
+        return helpers.run(path.join(__dirname, '../generators/app'));
       });
 
       it('does not set package name', () => {
@@ -35,7 +35,9 @@ describe('jb-node:app', () => {
 
     describe('with name', () => {
       beforeEach(() => {
-        return helpers.run(path.join(__dirname, '../app')).withOptions(testOptions);
+        return helpers
+          .run(path.join(__dirname, '../generators/app'))
+          .withOptions(testOptions);
       });
 
       it('creates package.json', () => {
@@ -59,7 +61,7 @@ describe('jb-node:app', () => {
   describe('with existing package.json', () => {
     beforeEach(() => {
       return helpers
-        .run(path.join(__dirname, '../app'))
+        .run(path.join(__dirname, '../generators/app'))
         .withOptions(testOptions)
         .on('ready', gen => {
           gen.fs.writeJSON(gen.destinationPath('package.json'), existingPkg);
